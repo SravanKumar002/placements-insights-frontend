@@ -2,9 +2,14 @@ import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { Shield, Loader2, AlertCircle } from 'lucide-react'
-import { APP_NAME, PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
+import { ADMIN_DASHBOARD_PATH, APP_NAME } from '../config/constants'
 
-export function LoginPage() {
+type LoginPageProps = {
+    /** After successful sign-in (defaults to admin hub) */
+    redirectAfterLogin?: string
+}
+
+export function LoginPage({ redirectAfterLogin = ADMIN_DASHBOARD_PATH }: LoginPageProps) {
     const { role, login } = useAuth()
     const [email, setEmail] = useState('admin@nxtwave.co.in')
     const [password, setPassword] = useState('')
@@ -12,14 +17,14 @@ export function LoginPage() {
     const [loading, setLoading] = useState(false)
 
     // Already logged in as admin — go to dashboard
-    if (role === 'admin') return <Navigate to={PLACEMENTS_OVERVIEW_PATH} replace />
+    if (role === 'admin') return <Navigate to={redirectAfterLogin} replace />
 
     const handleAdminLogin = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
         setLoading(true)
         try {
-            await login(email, password)
+            await login(email, password, redirectAfterLogin)
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Login failed')
         } finally {

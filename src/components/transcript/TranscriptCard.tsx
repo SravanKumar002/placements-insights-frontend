@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Clock, CheckCircle2, Loader2, Building2, GraduationCap, ExternalLink, MessageSquareText } from 'lucide-react'
 import type { Transcript } from '../../types'
 import { formatDate, formatRelative } from '../../utils/formatDate'
+import { ADMIN_TRANSCRIPTS_PATH } from '../../config/constants'
 
 interface TranscriptCardProps {
     transcript: Transcript
@@ -85,7 +86,7 @@ export function TranscriptCard({ transcript: t }: TranscriptCardProps) {
 
                     {/* View link */}
                     <Link
-                        to={`/transcripts/${t.id}`}
+                        to={`${ADMIN_TRANSCRIPTS_PATH}/${t.id}`}
                         className="p-3 bg-slate-50 text-slate-400 group-hover:bg-[#0b4b8c] group-hover:text-white rounded-xl transition-all shadow-sm"
                         title="View transcript"
                     >

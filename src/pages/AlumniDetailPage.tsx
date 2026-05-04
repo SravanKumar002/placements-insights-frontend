@@ -7,6 +7,7 @@ import { QACard } from '../components/qa/QACard'
 import { AlumniAvatar } from '../components/alumni/AlumniAvatar'
 import { supabase } from '../config/supabase'
 import type { QAItem } from '../types'
+import { ADMIN_ALUMNI_PATH, ADMIN_TRANSCRIPTS_PATH } from '../config/constants'
 
 export function AlumniDetailPage() {
     const { id } = useParams<{ id: string }>()
@@ -51,7 +52,7 @@ export function AlumniDetailPage() {
 
     return (
         <div className="animate-fade-in">
-            <Link to="/alumni" className="flex items-center gap-2 text-sm text-surface-500 hover:text-surface-700 mb-6 transition-colors">
+            <Link to={ADMIN_ALUMNI_PATH} className="flex items-center gap-2 text-sm text-surface-500 hover:text-surface-700 mb-6 transition-colors">
                 <ArrowLeft className="w-4 h-4" />
                 Back to Alumni
             </Link>
@@ -189,7 +190,7 @@ export function AlumniDetailPage() {
                     <FileText className="w-4 h-4 text-surface-500" />
                     View the full call transcript for complete context
                 </div>
-                <Link to={`/transcripts/${profile.transcript_id}`} className="btn-secondary text-sm">
+                <Link to={`${ADMIN_TRANSCRIPTS_PATH}/${profile.transcript_id}`} className="btn-secondary text-sm">
                     View Transcript →
                 </Link>
             </div>

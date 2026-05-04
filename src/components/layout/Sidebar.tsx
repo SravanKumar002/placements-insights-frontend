@@ -16,13 +16,20 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { cn } from '../../utils/cn'
 import { useAuth } from '../../contexts/AuthContext'
 import { FeedbackModal } from '../student-cta/FeedbackModal'
+import {
+    ADMIN_ALUMNI_PATH,
+    ADMIN_DASHBOARD_PATH,
+    ADMIN_MASTER_QUESTIONS_PATH,
+    ADMIN_SUBMISSIONS_PATH,
+    ADMIN_TRANSCRIPTS_PATH,
+} from '../../config/constants'
 
 const adminLinks = [
-    { to: '/', label: 'Placements Overview', icon: LayoutDashboard },
-    { to: '/master-questions', label: 'Q&A Management', icon: ListChecks },
-    { to: '/transcripts', label: 'Interview Transcript Analyser', icon: FileText },
-    { to: '/alumni', label: 'Alumni Interview Experiences', icon: Users },
-    { to: '/submissions', label: 'Feedback from Students', icon: MessageSquareHeart },
+    { to: ADMIN_DASHBOARD_PATH, label: 'Placements Overview', icon: LayoutDashboard },
+    { to: ADMIN_MASTER_QUESTIONS_PATH, label: 'Q&A Management', icon: ListChecks },
+    { to: ADMIN_TRANSCRIPTS_PATH, label: 'Interview Transcript Analyser', icon: FileText },
+    { to: ADMIN_ALUMNI_PATH, label: 'Alumni Interview Experiences', icon: Users },
+    { to: ADMIN_SUBMISSIONS_PATH, label: 'Feedback from Students', icon: MessageSquareHeart },
     { to: '/posters', label: 'Academy Hiring Pulse', icon: Image },
 ]
 
@@ -53,7 +60,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         <NavLink
             key={to}
             to={to}
-            end={to === '/'}
+            end={to === ADMIN_DASHBOARD_PATH}
             className={({ isActive }) => cn('sidebar-link group', isActive && 'active')}
         >
             {({ isActive }) => (

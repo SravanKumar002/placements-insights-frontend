@@ -5,6 +5,7 @@ import { fetchAlumniPaginated } from '../services/alumniService'
 import type { AlumniProfile } from '../services/alumniService'
 import { AlumniEditModal } from '../components/alumni/AlumniEditModal'
 import { AlumniAvatar } from '../components/alumni/AlumniAvatar'
+import { ADMIN_ALUMNI_PATH } from '../config/constants'
 import { Pagination } from '../components/qa/Pagination'
 
 const PAGE_SIZE = 10
@@ -98,7 +99,7 @@ export function AlumniListPage() {
                                         </div>
                                         <div className="min-w-0">
                                             <Link
-                                                to={`/alumni/${cardId}`}
+                                                to={`${ADMIN_ALUMNI_PATH}/${cardId}`}
                                                 className="text-lg font-black text-slate-800 group-hover:text-[#0b4b8c] transition-colors truncate block"
                                             >
                                                 {a.name}

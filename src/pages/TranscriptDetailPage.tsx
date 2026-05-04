@@ -8,6 +8,7 @@ import { QAList } from '../components/qa/QAList'
 import { supabase } from '../config/supabase'
 import { AnalyzeButton } from '../components/AnalyzeButton'
 import { AlumniAvatar } from '../components/alumni/AlumniAvatar'
+import { ADMIN_TRANSCRIPTS_PATH } from '../config/constants'
 
 export function TranscriptDetailPage() {
     const { id } = useParams<{ id: string }>()
@@ -81,7 +82,7 @@ export function TranscriptDetailPage() {
         setDeleting(true)
         try {
             await deleteTranscript(id)
-            navigate('/transcripts')
+            navigate(ADMIN_TRANSCRIPTS_PATH)
         } catch (err) {
             console.error('Delete failed:', err)
             alert('Failed to delete transcript.')
@@ -141,7 +142,7 @@ export function TranscriptDetailPage() {
 
     return (
         <div className="animate-fade-in">
-            <Link to="/transcripts" className="flex items-center gap-2 text-sm text-surface-500 hover:text-surface-700 mb-6 transition-colors">
+            <Link to={ADMIN_TRANSCRIPTS_PATH} className="flex items-center gap-2 text-sm text-surface-500 hover:text-surface-700 mb-6 transition-colors">
                 <ArrowLeft className="w-4 h-4" />
                 Back to Transcripts
             </Link>

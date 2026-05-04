@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Clock, CheckCircle, Loader2, AlertCircle, FileText } from 'lucide-react'
 import { useTranscripts } from '../../hooks/useTranscripts'
 import { formatDate, formatRelative } from '../../utils/formatDate'
+import { ADMIN_TRANSCRIPTS_PATH } from '../../config/constants'
 
 const statusIcon = {
     pending: <Clock className="w-4 h-4 text-surface-500" />,
@@ -25,7 +26,7 @@ export function RecentCalls() {
         <div className="glass-card p-6">
             <div className="flex items-center justify-between mb-5">
                 <h2 className="section-title">Recent Calls</h2>
-                <Link to="/transcripts" className="text-xs text-brand-500 hover:text-brand-600 transition-colors">View all →</Link>
+                <Link to={ADMIN_TRANSCRIPTS_PATH} className="text-xs text-brand-500 hover:text-brand-600 transition-colors">View all →</Link>
             </div>
 
             {loading ? (
@@ -41,7 +42,7 @@ export function RecentCalls() {
                     {recent.map(t => (
                         <Link
                             key={t.id}
-                            to={`/transcripts/${t.id}`}
+                            to={`${ADMIN_TRANSCRIPTS_PATH}/${t.id}`}
                             className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 rounded-xl hover:bg-surface-100 transition-colors group"
                         >
                             <div className="flex items-center gap-3 min-w-0">

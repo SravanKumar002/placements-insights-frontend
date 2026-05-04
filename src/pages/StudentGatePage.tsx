@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Lock, GraduationCap, BookOpen, Users } from 'lucide-react'
-import { APP_NAME, PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
+import { APP_NAME, ADMIN_BASE_PATH, PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
 
 const FEATURES = [
     { icon: <GraduationCap className="w-4 h-4" />, text: 'Alumni journeys & placement stories' },
@@ -67,7 +67,7 @@ export function StudentGatePage() {
 
                 {/* Admin link */}
                 <Link
-                    to="/login"
+                    to={ADMIN_BASE_PATH}
                     className="mt-5 text-xs text-surface-400 hover:text-surface-600 transition-colors"
                 >
                     Admin access →

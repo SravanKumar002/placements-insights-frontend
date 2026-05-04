@@ -30,7 +30,7 @@ function allowStudentWithoutGate(): boolean {
 interface AuthState {
     role: Role | null
     loading: boolean
-    login: (email: string, password: string) => Promise<void>
+    login: (email: string, password: string, redirectTo?: string) => Promise<void>
     logout: () => Promise<void>
 }
 
@@ -89,11 +89,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         })
     }, [location.search, navigate])
 
-    const login = useCallback(async (email: string, password: string) => {
+    const login = useCallback(async (email: string, password: string, redirectTo: string = PLACEMENTS_OVERVIEW_PATH) => {
         const { error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) throw error
         setRole('admin')
-        navigate(PLACEMENTS_OVERVIEW_PATH, { replace: true })
+        navigate(redirectTo, { replace: true })
     }, [navigate])
 
     const logout = useCallback(async () => {
