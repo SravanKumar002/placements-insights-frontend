@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AppLayout } from '../components/layout/AppLayout'
 import { ProtectedRoute } from '../components/auth/ProtectedRoute'
 import { useAuth } from '../contexts/AuthContext'
@@ -21,7 +21,7 @@ import { PostersPage } from '../pages/PostersPage'
 import { HiringPulsePage } from '../pages/HiringPulsePage'
 import { StudentHomepage } from '../components/dashboard/student/StudentHomepage'
 import { StudentGatePage } from '../pages/StudentGatePage'
-import { PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
+import { AUTH_CALLBACK_PATH, PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
 import { Loader2 } from 'lucide-react'
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
@@ -41,6 +41,26 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
     }
 
     return <>{children}</>
+}
+
+/**
+ * Backend / email links often use `/?auth_token=…` but exchange logic lives on `/auth/callback`.
+ * Redirect first so we never flash the student gate.
+ */
+export function AppWithAuthTokenRedirect() {
+    const location = useLocation()
+    if (location.pathname !== AUTH_CALLBACK_PATH) {
+        const params = new URLSearchParams(location.search)
+        if (params.get('auth_token')) {
+            return (
+                <Navigate
+                    to={{ pathname: AUTH_CALLBACK_PATH, search: location.search, hash: location.hash }}
+                    replace
+                />
+            )
+        }
+    }
+    return <AppRoutes />
 }
 
 export function AppRoutes() {

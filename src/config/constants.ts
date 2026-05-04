@@ -230,4 +230,7 @@ export const APP_TAGLINE = 'Alumni knowledge, instantly accessible'
 
 /** Student sidebar "Placements Overview" + admin home; `DashboardPage` shows `StudentHomepage` for students here */
 export const PLACEMENTS_OVERVIEW_PATH = '/'
+
+/** Magic-link / exchange token handling (`AuthCallbackPage`) — must match route path */
+export const AUTH_CALLBACK_PATH = '/auth/callback'
 export const DEFAULT_AVATAR_URL = 'https://ui-avatars.com/api/?background=0b69ff&color=fff&size=64'
