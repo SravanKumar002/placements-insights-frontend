@@ -52,9 +52,16 @@ export function StudentGatePage() {
                             ))}
                         </ul>
 
-                        <p className="text-sm text-surface-600 mb-1">
-                            Access is granted through your program invite link or admin sign-in below.
+                        <p className="text-sm text-surface-600 mb-4">
+                            Use your program entry link below to open the student experience, or admin sign-in.
                         </p>
+
+                        <Link
+                            to="/?student=1"
+                            className="w-full flex items-center justify-center px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm transition-colors"
+                        >
+                            Continue as student
+                        </Link>
                     </div>
                 </div>
 
