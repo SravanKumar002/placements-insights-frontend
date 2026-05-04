@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { Shield, Loader2, AlertCircle } from 'lucide-react'
-import { APP_NAME } from '../config/constants'
+import { APP_NAME, PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
 
 export function LoginPage() {
     const { role, login } = useAuth()
@@ -12,7 +12,7 @@ export function LoginPage() {
     const [loading, setLoading] = useState(false)
 
     // Already logged in as admin — go to dashboard
-    if (role === 'admin') return <Navigate to="/" replace />
+    if (role === 'admin') return <Navigate to={PLACEMENTS_OVERVIEW_PATH} replace />
 
     const handleAdminLogin = async (e: React.FormEvent) => {
         e.preventDefault()

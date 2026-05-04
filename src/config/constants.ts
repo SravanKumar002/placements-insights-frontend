@@ -227,4 +227,7 @@ export const CATEGORY_META: Record<QACategory, CategoryMeta> = {
 // =============================================
 export const APP_NAME = 'PlacementIQ'
 export const APP_TAGLINE = 'Alumni knowledge, instantly accessible'
+
+/** Student sidebar "Placements Overview" + admin home; `DashboardPage` shows `StudentHomepage` for students here */
+export const PLACEMENTS_OVERVIEW_PATH = '/'
 export const DEFAULT_AVATAR_URL = 'https://ui-avatars.com/api/?background=0b69ff&color=fff&size=64'

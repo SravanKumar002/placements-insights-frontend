@@ -21,6 +21,7 @@ import { PostersPage } from '../pages/PostersPage'
 import { HiringPulsePage } from '../pages/HiringPulsePage'
 import { StudentHomepage } from '../components/dashboard/student/StudentHomepage'
 import { StudentGatePage } from '../pages/StudentGatePage'
+import { PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
 import { Loader2 } from 'lucide-react'
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
@@ -74,7 +75,7 @@ export function AppRoutes() {
             </Route>
 
             {/* Fallback */}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to={PLACEMENTS_OVERVIEW_PATH} replace />} />
         </Routes>
     )
 }

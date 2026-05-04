@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom'
+import { PLACEMENTS_OVERVIEW_PATH } from '../../config/constants'
 import { useAuth, type Role } from '../../contexts/AuthContext'
 import { Loader2 } from 'lucide-react'
 
@@ -18,8 +19,8 @@ export function ProtectedRoute({ allowedRoles, children }: ProtectedRouteProps) 
         )
     }
 
-    if (!role) return <Navigate to="/" replace />
-    if (!allowedRoles.includes(role)) return <Navigate to="/" replace />
+    if (!role) return <Navigate to={PLACEMENTS_OVERVIEW_PATH} replace />
+    if (!allowedRoles.includes(role)) return <Navigate to={PLACEMENTS_OVERVIEW_PATH} replace />
 
     return <>{children}</>
 }

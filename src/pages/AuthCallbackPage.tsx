@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Loader2 } from 'lucide-react'
+import { PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
 import { isPlacementApiConfigured } from '../config/placementApi'
 import { validatePlacementAuthCode } from '../services/placementAuthService'
 
@@ -78,7 +79,7 @@ export function AuthCallbackPage() {
                         return
                     }
                     setStudentSession({ userId: result.user_id })
-                    navigate('/', { replace: true })
+                    navigate(PLACEMENTS_OVERVIEW_PATH, { replace: true })
                     return
                 } catch (e) {
                     if (cancelled) return
@@ -91,11 +92,11 @@ export function AuthCallbackPage() {
             if (legacyToken || mobile) {
                 console.log('SSO callback received', { token: legacyToken, mobile })
                 setStudentSession()
-                navigate('/', { replace: true })
+                navigate(PLACEMENTS_OVERVIEW_PATH, { replace: true })
                 return
             }
 
-            navigate('/', { replace: true })
+            navigate(PLACEMENTS_OVERVIEW_PATH, { replace: true })
         }
 
         void run()

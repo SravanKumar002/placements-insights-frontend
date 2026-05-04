@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Lock, GraduationCap, BookOpen, Users } from 'lucide-react'
-import { APP_NAME } from '../config/constants'
+import { APP_NAME, PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
 
 const FEATURES = [
     { icon: <GraduationCap className="w-4 h-4" />, text: 'Alumni journeys & placement stories' },
@@ -57,7 +57,7 @@ export function StudentGatePage() {
                         </p>
 
                         <Link
-                            to="/?student=1"
+                            to={`${PLACEMENTS_OVERVIEW_PATH}?student=1`}
                             className="w-full flex items-center justify-center px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm transition-colors"
                         >
                             Continue as student

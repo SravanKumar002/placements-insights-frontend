@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { supabase } from '../config/supabase'
 import { trackStudentLogin } from '../services/analyticsService'
 import { getStudentSession } from '../pages/AuthCallbackPage'
+import { PLACEMENTS_OVERVIEW_PATH } from '../config/constants'
 
 export type Role = 'student' | 'admin'
 
@@ -20,22 +21,6 @@ function directStudentAccess(): boolean {
     } catch {
         return false
     }
-}
-
-/** If URL has `?student=1`, persist flag and strip the param so `/` loads the student dashboard. */
-function grantDirectStudentFromUrl(): void {
-    if (typeof window === 'undefined') return
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('student') !== '1') return
-    try {
-        localStorage.setItem(DIRECT_STUDENT_STORAGE_KEY, '1')
-    } catch {
-        /* quota / private mode */
-    }
-    params.delete('student')
-    const qs = params.toString()
-    const next = window.location.pathname + (qs ? `?${qs}` : '') + window.location.hash
-    window.history.replaceState({}, '', next)
 }
 
 function allowStudentWithoutGate(): boolean {
@@ -71,7 +56,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // Resolve role from session + `?student=1` entry link (re-runs when query changes, e.g. in-app link from gate)
     useEffect(() => {
-        grantDirectStudentFromUrl()
+        const params = new URLSearchParams(location.search)
+        if (params.get('student') === '1') {
+            try {
+                localStorage.setItem(DIRECT_STUDENT_STORAGE_KEY, '1')
+            } catch {
+                /* quota / private mode */
+            }
+            params.delete('student')
+            const qs = params.toString()
+            navigate(
+                { pathname: location.pathname, search: qs ? `?${qs}` : '', hash: location.hash },
+                { replace: true }
+            )
+        }
 
         void supabase.auth.getSession().then(({ data: { session } }) => {
             if (session) {
@@ -89,19 +87,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             }
             setLoading(false)
         })
-    }, [location.search])
+    }, [location.search, navigate])
 
     const login = useCallback(async (email: string, password: string) => {
         const { error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) throw error
         setRole('admin')
-        navigate('/')
+        navigate(PLACEMENTS_OVERVIEW_PATH, { replace: true })
     }, [navigate])
 
     const logout = useCallback(async () => {
         await supabase.auth.signOut()
         setRole(getStudentSession() || allowStudentWithoutGate() ? 'student' : null)
-        navigate('/')
+        navigate(PLACEMENTS_OVERVIEW_PATH, { replace: true })
     }, [navigate])
 
     return (
