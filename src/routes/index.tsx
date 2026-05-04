@@ -20,6 +20,7 @@ import { MasterQuestionsPage } from '../pages/MasterQuestionsPage'
 import { PostersPage } from '../pages/PostersPage'
 import { HiringPulsePage } from '../pages/HiringPulsePage'
 import { StudentHomepage } from '../components/dashboard/student/StudentHomepage'
+import { StudentGatePage } from '../pages/StudentGatePage'
 import { Loader2 } from 'lucide-react'
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
@@ -33,10 +34,9 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
         )
     }
 
-    // Not verified through NxtWave SSO and not an admin → redirect to NxtWave login
+    // Not verified through NxtWave SSO and not an admin → stay on this origin (student gate + admin link)
     if (role === null) {
-        window.location.href = 'https://meetings.ccbp.in/mid/nxtwave_placements_insights'
-        return null
+        return <StudentGatePage />
     }
 
     return <>{children}</>

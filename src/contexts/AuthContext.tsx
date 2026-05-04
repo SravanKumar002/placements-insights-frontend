@@ -6,6 +6,11 @@ import { getStudentSession } from '../pages/AuthCallbackPage'
 
 export type Role = 'student' | 'admin'
 
+/** When true, unauthenticated users are treated as students (no NxtWave SSO gate). Set in Vercel for open demo deploys. */
+function openStudentAccess(): boolean {
+    return import.meta.env.VITE_OPEN_STUDENT_ACCESS === 'true'
+}
+
 interface AuthState {
     role: Role | null
     loading: boolean
@@ -33,6 +38,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     sessionStorage.setItem('student_login_tracked', '1')
                     trackStudentLogin()
                 }
+            } else if (openStudentAccess()) {
+                setRole('student')
             } else {
                 // Not verified → show gate
                 setRole(null)
@@ -44,8 +51,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             if (session) {
                 setRole('admin')
             } else {
-                // On admin logout, re-check student session
-                setRole(getStudentSession() ? 'student' : null)
+                // On admin logout, re-check student session / open-access mode
+                setRole(getStudentSession() || openStudentAccess() ? 'student' : null)
             }
         })
 
@@ -61,7 +68,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const logout = useCallback(async () => {
         await supabase.auth.signOut()
-        setRole(getStudentSession() ? 'student' : null)
+        setRole(getStudentSession() || openStudentAccess() ? 'student' : null)
         navigate('/')
     }, [navigate])
 

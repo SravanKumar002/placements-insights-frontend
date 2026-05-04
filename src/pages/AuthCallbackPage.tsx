@@ -87,9 +87,14 @@ export function AuthCallbackPage() {
                 }
             }
 
-            // NxtWave SSO callback (no Placement exchange token)
-            console.log('SSO callback received', { token: legacyToken, mobile })
-            setStudentSession()
+            // NxtWave SSO callback (no Placement exchange token) — only when SSO actually sent params
+            if (legacyToken || mobile) {
+                console.log('SSO callback received', { token: legacyToken, mobile })
+                setStudentSession()
+                navigate('/', { replace: true })
+                return
+            }
+
             navigate('/', { replace: true })
         }
 
@@ -105,10 +110,10 @@ export function AuthCallbackPage() {
                 <div className="max-w-md text-center space-y-4">
                     <p className="text-sm text-red-600">{error}</p>
                     <Link
-                        to="/student-gate"
+                        to="/"
                         className="inline-block text-sm font-medium text-brand-600 hover:text-brand-700"
                     >
-                        Back to student login
+                        Back to home
                     </Link>
                 </div>
             </div>
