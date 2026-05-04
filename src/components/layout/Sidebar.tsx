@@ -10,6 +10,7 @@ import {
     Brain,
     Image,
     Briefcase,
+    Fingerprint,
     LogOut,
 } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -21,11 +22,13 @@ import {
     ADMIN_DASHBOARD_PATH,
     ADMIN_MASTER_QUESTIONS_PATH,
     ADMIN_SUBMISSIONS_PATH,
+    ADMIN_PLACEMENT_USER_PATH,
     ADMIN_TRANSCRIPTS_PATH,
 } from '../../config/constants'
 
 const adminLinks = [
     { to: ADMIN_DASHBOARD_PATH, label: 'Placements Overview', icon: LayoutDashboard },
+    { to: ADMIN_PLACEMENT_USER_PATH, label: 'User ID', icon: Fingerprint },
     { to: ADMIN_MASTER_QUESTIONS_PATH, label: 'Q&A Management', icon: ListChecks },
     { to: ADMIN_TRANSCRIPTS_PATH, label: 'Interview Transcript Analyser', icon: FileText },
     { to: ADMIN_ALUMNI_PATH, label: 'Alumni Interview Experiences', icon: Users },

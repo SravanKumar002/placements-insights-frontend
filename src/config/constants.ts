@@ -241,4 +241,6 @@ export const ADMIN_MASTER_QUESTIONS_PATH = '/admin/master-questions'
 export const ADMIN_TRANSCRIPTS_PATH = '/admin/transcripts'
 export const ADMIN_ALUMNI_PATH = '/admin/alumni'
 export const ADMIN_SUBMISSIONS_PATH = '/admin/submissions'
+/** Gamma / magic-link placement userId lookup */
+export const ADMIN_PLACEMENT_USER_PATH = '/admin/placement-user'
 export const DEFAULT_AVATAR_URL = 'https://ui-avatars.com/api/?background=0b69ff&color=fff&size=64'

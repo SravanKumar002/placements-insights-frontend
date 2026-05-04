@@ -15,6 +15,7 @@ import { InterviewIntelligencePage } from '../pages/InterviewIntelligencePage'
 import { SearchResultsPage } from '../pages/SearchResultsPage'
 import { CWCRegistrationPage } from '../pages/CWCRegistrationPage'
 import { StudentSubmissionsPage } from '../pages/StudentSubmissionsPage'
+import { AdminPlacementUserPage } from '../pages/AdminPlacementUserPage'
 import { MasterQuestionsPage } from '../pages/MasterQuestionsPage'
 import { PostersPage } from '../pages/PostersPage'
 import { HiringPulsePage } from '../pages/HiringPulsePage'
@@ -30,6 +31,7 @@ import {
     ADMIN_TRANSCRIPTS_PATH,
     ADMIN_ALUMNI_PATH,
     ADMIN_SUBMISSIONS_PATH,
+    ADMIN_PLACEMENT_USER_PATH,
 } from '../config/constants'
 import { Loader2 } from 'lucide-react'
 
@@ -114,6 +116,7 @@ export function AppRoutes() {
                 <Route path={ADMIN_ALUMNI_PATH} element={<AlumniListPage />} />
                 <Route path={`${ADMIN_ALUMNI_PATH}/:id`} element={<AlumniDetailPage />} />
                 <Route path={ADMIN_SUBMISSIONS_PATH} element={<StudentSubmissionsPage />} />
+                <Route path={ADMIN_PLACEMENT_USER_PATH} element={<AdminPlacementUserPage />} />
             </Route>
 
             {/* Old admin URLs → /admin/... */}
