@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom'
 import { Lock, GraduationCap, BookOpen, Users } from 'lucide-react'
 import { APP_NAME } from '../config/constants'
 
-const SSO_URL = 'https://meetings.ccbp.in/mid/nxtwave_placements_insights'
-
 const FEATURES = [
     { icon: <GraduationCap className="w-4 h-4" />, text: 'Alumni journeys & placement stories' },
     { icon: <BookOpen className="w-4 h-4" />, text: 'Common placement doubts answered' },
@@ -54,22 +52,8 @@ export function StudentGatePage() {
                             ))}
                         </ul>
 
-                        {/* SSO Button */}
-                        <a
-                            href={SSO_URL}
-                            className="relative overflow-hidden w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-900 font-bold text-sm transition-all duration-200 shadow-md shadow-amber-200/60 hover:shadow-lg hover:shadow-amber-200/80 hover:-translate-y-0.5"
-                        >
-                            <span className="pointer-events-none absolute inset-y-0 left-0 w-full animate-shimmer bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.65)_50%,transparent_100%)]" />
-                            <img
-                                src="https://d14qv6cm1t62pm.cloudfront.net/logos/Nxtwave_90_48.png?q=80&auto=format%2C+compress"
-                                alt=""
-                                className="h-4 w-auto"
-                            />
-                            Continue with NxtWave
-                        </a>
-
-                        <p className="text-xs text-surface-400 mt-3">
-                            Login using your registered mobile number & OTP
+                        <p className="text-sm text-surface-600 mb-1">
+                            Access is granted through your program invite link or admin sign-in below.
                         </p>
                     </div>
                 </div>
